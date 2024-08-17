@@ -7,34 +7,26 @@ module Chess
       setup_pieces
     end
 
-
     def display
-      b = @board
-      puts board =  <<~BOARD
-          a   b   c   d   e   f   g   h
-        +---+---+---+---+---+---+---+---+
-      8 | #{b[7][0]} | #{b[7][1]} | #{b[7][2]} | #{b[7][3]} | #{b[7][4]} | #{b[7][5]} | #{b[7][6]} | #{b[7][7]} | 8
-        +---+---+---+---+---+---+---+---+
-      7 | #{b[6][0]} | #{b[6][1]} | #{b[6][2]} | #{b[6][3]} | #{b[6][4]} | #{b[6][5]} | #{b[6][6]} | #{b[6][7]} | 7
-        +---+---+---+---+---+---+---+---+
-      6 | #{b[5][0]} | #{b[5][1]} | #{b[5][2]} | #{b[5][3]} | #{b[5][4]} | #{b[5][5]} | #{b[5][6]} | #{b[5][7]} | 6
-        +---+---+---+---+---+---+---+---+
-      5 | #{b[4][0]} | #{b[4][1]} | #{b[4][2]} | #{b[4][3]} | #{b[4][4]} | #{b[4][5]} | #{b[4][6]} | #{b[4][7]} | 5
-        +---+---+---+---+---+---+---+---+
-      4 | #{b[3][0]} | #{b[3][1]} | #{b[3][2]} | #{b[3][3]} | #{b[3][4]} | #{b[3][5]} | #{b[3][6]} | #{b[3][7]} | 4
-        +---+---+---+---+---+---+---+---+
-      3 | #{b[2][0]} | #{b[2][1]} | #{b[2][2]} | #{b[2][3]} | #{b[2][4]} | #{b[2][5]} | #{b[2][6]} | #{b[2][7]} | 3
-        +---+---+---+---+---+---+---+---+
-      2 | #{b[1][0]} | #{b[1][1]} | #{b[1][2]} | #{b[1][3]} | #{b[1][4]} | #{b[1][5]} | #{b[1][6]} | #{b[1][7]} | 2
-        +---+---+---+---+---+---+---+---+
-      1 | #{b[0][0]} | #{b[0][1]} | #{b[0][2]} | #{b[0][3]} | #{b[0][4]} | #{b[0][5]} | #{b[0][6]} | #{b[0][7]} | 1
-        +---+---+---+---+---+---+---+---+
-          a   b   c   d   e   f   g   h
-      BOARD
+      files = ('a'..'h').to_a
+      puts "    #{files.join('   ')}"
+      puts "  +---" + ("+---" * 7) + "+"
+
+      @board.reverse.each_with_index do |row, i|
+        puts "#{8 - i} | #{row.map { |piece| piece_icon(piece) }.join(' | ')} | #{8 - i}"
+        puts "  +---" + ("+---" * 7) + "+"
+      end
+
+      puts "    #{files.join('   ')}"
     end
 
-    def move_piece()
+    def piece_icon(piece)
+      piece == ' ' ? ' ' : piece.icon
+    end
 
+    def move_piece(piece, start_pos, dest_pos)
+      @board[dest_pos[0]][dest_pos[1]] = @board[start_pos[0]][start_pos[1]]
+      @board[start_pos[0]][start_pos[1]] = ' '
     end
 
     private
@@ -47,11 +39,11 @@ module Chess
     def setup_pawns
       # White Pawns
       (0..7).each do |file|
-        @board[1][file] = Chess::Pawn.new(:white).icon
+        @board[1][file] = Chess::Pawn.new(:white)
       end
       # Black Pawns
       (0..7).each do |file|
-        @board[6][file] = Chess::Pawn.new(:black).icon
+        @board[6][file] = Chess::Pawn.new(:black)
       end
     end
 
@@ -61,14 +53,14 @@ module Chess
     end
 
     def setup_major_pieces_for(color, rank)
-      @board[rank][0] = Chess::Rook.new(color).icon
-      @board[rank][1] = Chess::Knight.new(color).icon
-      @board[rank][2] = Chess::Bishop.new(color).icon
-      @board[rank][3] = Chess::Queen.new(color).icon
-      @board[rank][4] = Chess::King.new(color).icon
-      @board[rank][5] = Chess::Bishop.new(color).icon
-      @board[rank][6] = Chess::Knight.new(color).icon
-      @board[rank][7] = Chess::Rook.new(color).icon
+      @board[rank][0] = Chess::Rook.new(color)
+      @board[rank][1] = Chess::Knight.new(color)
+      @board[rank][2] = Chess::Bishop.new(color)
+      @board[rank][3] = Chess::Queen.new(color)
+      @board[rank][4] = Chess::King.new(color)
+      @board[rank][5] = Chess::Bishop.new(color)
+      @board[rank][6] = Chess::Knight.new(color)
+      @board[rank][7] = Chess::Rook.new(color)
     end
   end
 end

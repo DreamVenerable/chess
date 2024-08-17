@@ -10,9 +10,9 @@ module Chess
         @board.display
         puts "#{@current_player}'s turn. Enter your move:"
         move_input = gets.chomp
-        piece, destination, capture, promotion = NotationParser.parse_move(move_input)
+        piece_type, start_pos, dest_pos = NotationParser.parse_move(move_input)
 
-
+        @board.move_piece(piece_type, start_pos, dest_pos)
       end
     end
   end
