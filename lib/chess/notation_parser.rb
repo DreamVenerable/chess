@@ -8,5 +8,11 @@ module Chess
 
       [piece, destination, capture, promotion]
     end
+
+    def convert_to_index(destination)
+      file = destination[0].ord - 'a'.ord
+      rank = destination[1] - 1
+      [rank, file]
+    end
   end
 end
