@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
-require_relative '../lib/chess/game'
-require_relative '../lib/chess/board'
+require_relative '../lib/chess/game.rb'
+require_relative '../lib/chess/board.rb'
 require_relative '../lib/chess/special_moves.rb'
 require_relative '../lib/chess/notation_parser.rb'
 require_relative '../lib/chess/piece.rb'
