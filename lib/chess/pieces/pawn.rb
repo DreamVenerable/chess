@@ -2,6 +2,8 @@ require_relative '../piece'
 
 module Chess
   class Pawn < Piece
+
+
     def valid_move?(start_pos, end_pos, board)
       start_rank, start_file = start_pos
       end_rank, end_file = end_pos
@@ -24,6 +26,13 @@ module Chess
         return true if board[end_rank][end_file] != ' ' && board[end_rank][end_file].color != color
       end
     end
+
+    # def promote(pos, board)
+    #   piece = board[pos[0]][pos[1]]
+    #   color = piece.color
+
+
+    # end
 
     private
 

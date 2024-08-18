@@ -24,7 +24,7 @@ module Chess
       piece == ' ' ? ' ' : piece.icon
     end
 
-    def move_piece(piece, start_pos, dest_pos)
+    def move_piece(start_pos, dest_pos)
       @board[dest_pos[0]][dest_pos[1]] = @board[start_pos[0]][start_pos[1]]
       @board[start_pos[0]][start_pos[1]] = ' '
     end
