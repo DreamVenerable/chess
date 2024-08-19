@@ -15,17 +15,21 @@ Welcome to the CLI Chess Game, a command-line interface chess game written in Ru
 ## Installation
 
 1.  **Clone the repository:**
-    ```git clone https://github.com/yourusername/cli-chess-game.git
-       cd cli-chess-game
+    ```git clone [repo link]
+       cd chess
     ```
 
 2.  **Install dependencies:**
     Ensure you have Ruby installed on your machine. Then, install any necessary gems:
-    ```bundle install```
+    ```
+    bundle install
+    ```
 
 3.  **Run the game:**
     Start the game by running the following command:
-    ```ruby bin/main.rb```
+    ```
+    ruby bin/main.rb
+    ```
 
 ## How to Play
 
