@@ -5,11 +5,8 @@ module Chess
     def valid_move?(start_pos, end_pos, board)
       super
 
+      # Make sure path is straight
       return false unless @start_rank == @end_rank || @end_file == @start_file
-
-      if @end_file == @start_file || @start_rank == @end_rank
-
-      end
 
       # Make sure path is empty
       rank_step = (@end_rank <=> @start_rank)
@@ -22,8 +19,6 @@ module Chess
         current_rank += rank_step
         current_file += file_step
       end
-
-      board[@end_rank][@end_file] == ' ' || board[@end_rank][@end_file].color != @color
     end
 
     private

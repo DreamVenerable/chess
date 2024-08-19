@@ -5,9 +5,8 @@ module Chess
     def valid_move?(start_pos, end_pos, board)
       super
 
-      displacement = [(@end_rank - @start_rank).abs, (@end_file - @start_file).abs]
-
       # Make sure path is diagonal
+      displacement = [(@end_rank - @start_rank).abs, (@end_file - @start_file).abs]
       return false unless displacement[0] == displacement[1]
 
       # Make sure path is empty
@@ -21,8 +20,6 @@ module Chess
         current_rank += rank_step
         current_file += file_step
       end
-
-      board[@end_rank][@end_file] == ' ' || board[@end_rank][@end_file].color != @color
     end
 
     private
