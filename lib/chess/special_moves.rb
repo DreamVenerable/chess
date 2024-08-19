@@ -3,7 +3,7 @@ module Chess
     module Promotion
       def self.promote?(pos, board)
         piece = board[pos[0]][pos[1]]
-        return true if piece.is_a?(Pawn) && (piece.color == :white && pos[0] == 7) || (piece.color == :black && pos[0] == 0)
+        return true if (piece.is_a?(Pawn)) && ((piece.color == :white && pos[0] == 7) || (piece.color == :black && pos[0] == 0))
       end
 
       def self.promote(pos, board)
