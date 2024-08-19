@@ -12,7 +12,7 @@ module Chess
       @end_rank, @end_file = end_pos
 
       # End position should be empty or not have an ally piece
-      return false unless (board[@end_rank][@end_file] == ' ') || (board[@end_rank][@end_file].color != @color)
+      (board[@end_rank][@end_file] == ' ') || (board[@end_rank][@end_file].color != @color)
     end
 
 

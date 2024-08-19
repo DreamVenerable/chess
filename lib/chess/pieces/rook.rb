@@ -3,10 +3,7 @@ require_relative '../piece'
 module Chess
   class Rook < Piece
     def valid_move?(start_pos, end_pos, board)
-      super
-
-      # Make sure path is straight
-      return false unless @start_rank == @end_rank || @end_file == @start_file
+      return false unless super
 
       # Make sure path is empty
       rank_step = (@end_rank <=> @start_rank)
@@ -19,6 +16,9 @@ module Chess
         current_rank += rank_step
         current_file += file_step
       end
+
+      # Make sure path is straight
+      return true if @start_rank == @end_rank || @end_file == @start_file
     end
 
     private

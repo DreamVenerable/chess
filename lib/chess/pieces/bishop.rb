@@ -3,11 +3,7 @@ require_relative '../piece'
 module Chess
   class Bishop < Piece
     def valid_move?(start_pos, end_pos, board)
-      super
-
-      # Make sure path is diagonal
-      displacement = [(@end_rank - @start_rank).abs, (@end_file - @start_file).abs]
-      return false unless displacement[0] == displacement[1]
+      return false unless super
 
       # Make sure path is empty
       rank_step = (@end_rank <=> @start_rank)
@@ -20,6 +16,10 @@ module Chess
         current_rank += rank_step
         current_file += file_step
       end
+
+      # Make sure path is diagonal
+      displacement = [(@end_rank - @start_rank).abs, (@end_file - @start_file).abs]
+      return true if displacement[0] == displacement[1]
     end
 
     private
