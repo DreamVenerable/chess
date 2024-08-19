@@ -4,7 +4,7 @@ Welcome to the CLI Chess Game, a command-line interface chess game written in Ru
 
 ## Features
 
-- **2-Player Mode**: Play against a friend in a classic head-to-head chess match.
+- **2-Player Mode**
 - **Five Game Modes**: Choose from various game modes to keep the game fresh and exciting:
   - **Normal**: Standard chess rules apply.
   - **3-Check**: Win by placing your opponent's king in check three times.
@@ -12,11 +12,16 @@ Welcome to the CLI Chess Game, a command-line interface chess game written in Ru
   - **King of the Hill**: First to reach one of the 4 center squares with thier king wins.
   - **Dark Chess (Fog of War)**: Only see the opponent's pieces when they are in your line of sight.
 
+## What I've Learnt
+This project helped me in OPP tremendously, it showed me where I was lacking (somethings that I thought I had down) and taught me new things!
+
+It also made my brain gears turn trying to come up with ways to implement some of the rules/features!
+
 ## Installation
 
 1.  **Clone the repository:**
     ```
-    git clone [repo link]
+    git clone https://github.com/DreamVenerable/chess.git
     cd chess
     ```
 
