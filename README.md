@@ -15,8 +15,9 @@ Welcome to the CLI Chess Game, a command-line interface chess game written in Ru
 ## Installation
 
 1.  **Clone the repository:**
-    ```git clone [repo link]
-       cd chess
+    ```
+    git clone [repo link]
+    cd chess
     ```
 
 2.  **Install dependencies:**
