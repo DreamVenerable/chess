@@ -12,6 +12,9 @@ module Chess
       current_rank, current_file = @start_rank + rank_step, @start_file + file_step
 
       while [current_rank, current_file] != [@end_rank, @end_file]
+        # Stop loop if out of bounds
+        break if current_rank <= 0 || current_rank >= 7 || current_file <= 0 || current_file >= 7
+
         return false unless board[current_rank][current_file] == ' '
         current_rank += rank_step
         current_file += file_step
