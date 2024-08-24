@@ -13,7 +13,7 @@ module Chess
 
       while [current_rank, current_file] != [@end_rank, @end_file]
         # Stop loop if out of bounds
-        break if current_rank <= 0 || current_rank >= 7 || current_file <= 0 || current_file >= 7
+        break if current_rank.between?(0, 7) && current_file.between?(0, 7)
 
         return false unless board[current_rank][current_file] == ' '
         current_rank += rank_step
