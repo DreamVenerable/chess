@@ -12,13 +12,13 @@ module Chess
       current_rank, current_file = @start_rank + rank_step, @start_file + file_step
 
       while [current_rank, current_file] != [@end_rank, @end_file]
-        # Stop loop if out of bounds
 
         return false unless board[current_rank][current_file] == ' '
         current_rank += rank_step
         current_file += file_step
 
-        break if current_rank.between?(1, 6) && current_file.between?(1, 6)
+        # Stop loop if out of bounds
+        break if !current_rank.between?(0, 7) && !current_file.between?(0, 7)
       end
 
       # Make sure path is straight
