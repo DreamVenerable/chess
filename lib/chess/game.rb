@@ -1,22 +1,50 @@
 module Chess
   class Game
-    def initialize(first_player = :white)
-      @board = ChessBoard.new
+    def initialize(board = ChessBoard.new, first_player = :white)
+      @board = board
       @current_player = first_player
       @opponent = (first_player == :white ? :black : :white)
     end
 
+    def save_game
+      puts "Saving game..."
+      choose_file
+    end
+
+    def choose_file
+      loop do
+        puts "Type your file number to save your game: (0-9) or press 'b' to go back"
+        print_files
+        input = gets.chomp
+
+        if input == 'b'
+          puts "Going back to game! Make your move #{@current_player}!"
+          return
+        elsif input.match?(/^[0-9]$/)
+          write_file(input)
+        else
+          puts 'Wrong input, Try again!'
+        end
+      end
+    end
+
+    def write_file(i)
+      data = Marshal.dump([@board, @current_player])
+      File.write("./game_files/Game#{i}.marshal", data)
+      puts "Game saved!"
+      exit
+    end
+
     def play
       @board.display
+      puts "[S]ave & quit || [Q]uit without saving"
       loop do
-        # Gets player input
         puts "#{@current_player.capitalize}'s turn. Enter your move:"
         get_player_input
 
         # Moves piece
         move
 
-        # Switches players
         switch_player
 
         # Update display
@@ -33,7 +61,7 @@ module Chess
       loop do
         input = gets.chomp
         if input == 'q'
-          p "Saving and exiting..."
+          p "Exiting without saving..."
           exit
         elsif castling_notation?(input)
           if SpecialMoves::Castling.castling(input, @board.board, @current_player)
@@ -42,6 +70,8 @@ module Chess
           else
             puts "Unable to castle!"
           end
+        elsif input == 's'
+          save_game
         else
           if valid_notation?(input)
             parse_input(input)
