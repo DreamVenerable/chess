@@ -2,6 +2,10 @@
 
 Welcome to the CLI Chess Game, a command-line interface chess game written in Ruby. This project offers a traditional chess experience along with some exciting twists.
 
+Progress: Game is playable, everything is funcional, it's missing En Passant & ability to save game to reach the minimum TOP requirement for completion.
+
+Game modes haven't been implemented yet!
+
 ## Features
 
 - **2-Player Mode**
