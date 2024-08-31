@@ -1,9 +1,9 @@
 module Chess
   class Game
-    def initialize
+    def initialize(first_player = :white)
       @board = ChessBoard.new
-      @current_player = :white
-      @opponent = :black
+      @current_player = first_player
+      @opponent = (first_player == :white ? :black : :white)
     end
 
     def play
@@ -25,20 +25,36 @@ module Chess
         puts "Check!" if check?(find_king_position(@current_player))
 
         # Ends game if checkmate
-        break if checkmate?
+        exit if checkmate?
       end
     end
 
     def get_player_input
       loop do
         input = gets.chomp
-        if valid_notation?(input)
-          parse_input(input)
-          break
+        if input == 'q'
+          p "Saving and exiting..."
+          exit
+        elsif castling_notation?(input)
+          if SpecialMoves::Castling.castling(input, @board.board, @current_player)
+            switch_player
+            play
+          else
+            puts "Unable to castle!"
+          end
         else
-          puts "Invalid notation. Please enter your move in the following format: (e.g., e1b5)."
+          if valid_notation?(input)
+            parse_input(input)
+            break
+          else
+            puts "Invalid notation. Please enter your move in the following format: (e.g., e1b5)."
+          end
         end
       end
+    end
+
+    def castling_notation?(input)
+      ['0-0', '0-0-0'].any?(input)
     end
 
     def valid_notation?(input)
@@ -119,9 +135,7 @@ module Chess
     def check?(king_pos, board = @board.board)
       # Checks if any opponent piece can attack the king's position
       find_piece_positions(@opponent, board).each do |piece_class, position|
-        if valid_move?(position, king_pos, board, @opponent)
-          return true
-        end
+        return true if valid_move?(position, king_pos, board, @opponent)
       end
       false
     end
@@ -133,10 +147,7 @@ module Chess
           next unless square.is_a?(Piece) && square.color == @current_player
           valid_moves = find_valid_moves([r, f], square)
           valid_moves.each do |move|
-            unless move_leaves_king_checked?([r, f], move)
-              puts "From: #{[r, f]} to #{move} -- By #{square.icon}"
-              return false
-            end
+            return false unless move_leaves_king_checked?([r, f], move)
           end
         end
       end

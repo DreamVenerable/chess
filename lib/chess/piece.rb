@@ -1,10 +1,11 @@
 module Chess
   class Piece
-    attr_reader :color, :icon
+    attr_reader :color, :icon, :first_move
 
     def initialize(color)
       @color = color
       @icon = icon_for(color)
+      @first_move = true
     end
 
     def valid_move?(start_pos, end_pos, board)

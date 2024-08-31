@@ -22,10 +22,17 @@ module Chess
       end
 
       # Make sure path is straight
-      return true if @start_rank == @end_rank || @end_file == @start_file
+      if @start_rank == @end_rank || @end_file == @start_file
+        moved if @first_move == true
+        return true
+      end
     end
 
     private
+
+    def moved
+      @first_move = false
+    end
 
     def icon_for(color)
       color == :white ? '♖' : '♜'
